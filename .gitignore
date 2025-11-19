@@ -1,18 +1,65 @@
-# Ignore Data
+# ======================================
+# 🚫 DATA & DATASETS (DO NOT UPLOAD)
+# ======================================
 data/
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.json
+*.zip
+*.rar
 
-# Ignore Virtual Environment
-.venv/
-venv/
+# Ignore image datasets
+*.jpg
+*.jpeg
+*.png
+*.tif
+*.tiff
+*.bmp
+*.gif
 
-# Ignore Saved Models (Large files)
+# ======================================
+# 🚫 MODEL WEIGHTS / ML CHECKPOINTS
+# ======================================
 saved_models/
 *.h5
+*.hdf5
+*.pb
+*.tflite
+*.pt
+*.pth
+*.onnx
 
-# Ignore Python cache
+# ======================================
+# 🚫 PYTHON ENVIRONMENTS
+# ======================================
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# ======================================
+# 🚫 PYTHON CACHE & JUPYTER FILES
+# ======================================
 __pycache__/
 *.pyc
+*.pyo
 .ipynb_checkpoints/
+*.sqlite
 
-# Ignore VS Code settings
+# ======================================
+# 🚫 EDITOR / OS GENERATED FILES
+# ======================================
 .vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ======================================
+# 🚫 LOGS / TEMP FILES
+# ======================================
+*.log
+*.tmp
+*.temp

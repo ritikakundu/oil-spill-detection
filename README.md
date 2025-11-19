@@ -1,298 +1,261 @@
-# Oil Spill Detection Using Deep Learning
+```md
+<p align="center">
+  <img src="https://i.imgur.com/mpu0yMQ.png" alt="Oil Spill Detection Banner" width="82%">
+</p>
 
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
-![Framework](https://img.shields.io/badge/Framework-TensorFlow-orange.svg)
-![Model](https://img.shields.io/badge/Models-U--Net%20%7C%20DeepLabV3%2B-green.svg)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+<h1 align="center">🛢️ Oil Spill Detection & Forensic Analysis</h1>
 
-A complete pipeline for **oil spill segmentation** using **U-Net** and **DeepLabV3+**, trained on satellite SAR imagery and enhanced with **AIS (Automatic Identification System) marine traffic data**.
+<p align="center">
+AI-driven satellite spill detection • U-Net • DeepLabV3+ • AIS Integration • Streamlit Dashboard  
+</p>
 
-This project includes training notebooks, an inference pipeline, and a clean modular structure for easy collaboration among team members.
+<br>
+
+<!-- 🔥 CENTERED CUSTOM BADGES -->
+<p align="center">
+
+  <!-- Python -->
+  <img src="https://img.shields.io/badge/Python-3.10%2B-2f77e5?style=for-the-badge&logo=python&logoColor=white"/>
+
+  <!-- TensorFlow -->
+  <img src="https://img.shields.io/badge/TensorFlow-2.16-fb8c00?style=for-the-badge&logo=tensorflow&logoColor=white"/>
+
+  <!-- Models -->
+  <img src="https://img.shields.io/badge/Models-U--Net%20%7C%20DeepLabV3%2B-43a047?style=for-the-badge&logo=keras&logoColor=white"/>
+
+  <!-- Streamlit -->
+  <img src="https://img.shields.io/badge/Streamlit-1.51-ff4b4b?style=for-the-badge&logo=streamlit&logoColor=white"/>
+
+  <!-- OpenCV -->
+  <img src="https://img.shields.io/badge/OpenCV-4.7-5c6bc0?style=for-the-badge&logo=opencv&logoColor=white"/>
+
+  <!-- Status -->
+  <img src="https://img.shields.io/badge/Status-Active-00c853?style=for-the-badge"/>
+
+  <!-- License -->
+  <img src="https://img.shields.io/badge/License-MIT-fdd835?style=for-the-badge"/>
+
+</p>
+
+<br>
 
 ---
 
-## Project Structure
+# 📁 Project Structure
 
-```plaintext
+```
+
 Oil_Spill_Project/
-├── data/
-│   ├── train/               # Kaggle Train dataset (images + masks)
-│   ├── test/                # Kaggle Test dataset
-│   └── ais_data/            # Marine Cadastre AIS ship-tracking data
 │
-├── saved_models/            # Trained model weights (.h5 files) are saved here
+├── app.py                        # Streamlit Web Interface
+│
+├── data/
+│   ├── train/                    # SAR images + masks (Kaggle)
+│   ├── test/                     # SAR test images
+│   └── ais_data/                 # AIS vessel-tracking CSV files
+│
+├── saved_models/                 # Trained .h5 model weights
+│   ├── unet_oil_spill.h5
+│   └── deeplabv3_oil_spill.h5
 │
 ├── notebooks/
-│   ├── 1_UNet_Training.ipynb        # U-Net architecture training workflow
-│   ├── 2_DeepLabV3_Training.ipynb   # DeepLabV3+ model training notebook
-│   └── 3_Final_Inference.ipynb      # Inference pipeline + evaluation
+│   ├── 1_UNet_Training.ipynb
+│   ├── 2_DeepLabV3_Training.ipynb
+│   └── 3_Final_Inference.ipynb
 │
-└── requirements.txt         # Python dependencies for the project
+├── 0_Prepare_AIS.py              # AIS data filter & cleaner
+│
+└── requirements.txt
+
+```
+
+---
+
+# 📥 Required Datasets
+
+## **1. Oil Spill Images (Satellite SAR Data)**  
+**Source:**  
+https://www.kaggle.com/competitions/airbus-ship-detection/data  
+
+**Action:**  
+Download → Unzip → Place files into:
+
+```
+
+data/train/
+data/test/
+
+```
+
+---
+
+## **2. AIS Vessel Data (Ship Tracking)**  
+**Source:**  
+https://marinecadastre.gov/ais/
+
+**Action:**  
+Download AIS CSV → Place into:
+
+```
+
+data/ais_data/
+
 ````
 
 ---
 
-## 📥 Required Datasets
+# 🚀 Features
 
-### **1. Oil Spill Images (Satellite SAR Data)**
+### 🛰️ Oil Spill Segmentation  
+Pixel-wise segmentation using **U-Net** and **DeepLabV3+**.
 
-**Source:** [https://www.kaggle.com/competitions/airbus-ship-detection/data](https://www.kaggle.com/competitions/airbus-ship-detection/data)
-**Action:**
+### 🔍 Forensic Visualization  
+- Binary mask  
+- Red spill overlay  
+- Area calculation in km²  
+- Confidence scoring  
 
-* Download → Unzip → place into:
+### 🚢 AIS Vessel Tracking  
+Identify and analyze vessels near spill location.
 
-```
-data/train/
-data/test/
-```
+### 📊 Streamlit Dashboard  
+Real-time inference, sliders, overlays, and severity levels.
 
-### **2. AIS Vessel Data (Ship Tracking)**
-
-**Source:** [https://marinecadastre.gov/ais/](https://marinecadastre.gov/ais/)
-**Action:**
-
-* Download any AIS CSV → place into:
-
-```
-data/ais_data/
-```
+### 🧠 Training Notebooks  
+Contains full training-to-inference workflow.
 
 ---
 
-## Installation
+# ⚙️ Installation
 
 ```bash
-git clone https://github.com/Spectrae/oil-spill-detection.git
+git clone https://github.com/YOUR_USERNAME/oil-spill-detection.git
 cd oil-spill-detection
+
+python3 -m venv .venv
+source .venv/bin/activate
+
 pip install -r requirements.txt
-```
+````
 
 ---
 
-## ⚡ GPU Setup (TensorFlow GPU + CUDA + cuDNN)
-
-### **Recommended Versions**
-
-| Component  | Version                                                    |
-| ---------- | ---------------------------------------------------------- |
-| Python     | 3.9 / 3.10                                                 |
-| TensorFlow | 2.10 (last version with GPU support without NVIDIA wheels) |
-| CUDA       | 11.2 or 11.8                                               |
-| cuDNN      | 8.x                                                        |
-
----
-
-### **1️⃣ Install NVIDIA GPU Drivers**
-
-Check GPU:
+# 🌐 Run the Web App
 
 ```bash
-nvidia-smi
+streamlit run app.py
 ```
-
-If it shows GPU info → drivers are installed.
 
 ---
 
-### **2️⃣ Install CUDA Toolkit**
+# 🧠 Notebook Overview
 
-Download from:
-[https://developer.nvidia.com/cuda-toolkit](https://developer.nvidia.com/cuda-toolkit)
+| Notebook                     | Description                            |
+| ---------------------------- | -------------------------------------- |
+| `1_UNet_Training.ipynb`      | U-Net architecture + model training    |
+| `2_DeepLabV3_Training.ipynb` | DeepLabV3+ segmentation experiments    |
+| `3_Final_Inference.ipynb`    | Predictions, visualization, evaluation |
 
-Check installation:
+---
+
+# 🛠 AIS Data Processing
 
 ```bash
-nvcc --version
+python 0_Prepare_AIS.py
+```
+
+Generates:
+
+```
+vessel_data_clean.csv
 ```
 
 ---
 
-### **3️⃣ Install cuDNN**
+# 🤝 How to Contribute (Fork → Clone → Branch → Commit → PR)
 
-Download:
-[https://developer.nvidia.com/cudnn](https://developer.nvidia.com/cudnn)
+## **1️⃣ Fork**
 
-Extract → copy cuDNN files into your CUDA directory:
-
-```
-/usr/local/cuda/include
-/usr/local/cuda/lib64
-```
-
----
-
-### **4️⃣ Install TensorFlow GPU version**
-
-```bash
-pip install tensorflow==2.10
-```
-
-Test GPU recognition:
-
-```python
-import tensorflow as tf
-print(tf.config.list_physical_devices('GPU'))
-```
-
-If it prints your GPU → setup is successful.
-
----
-
-## Models Implemented
-
-### **1. U-Net**
-
-* Strong baseline for segmentation
-* Robust with limited data
-
-### **2. DeepLabV3+**
-
-* State-of-the-art segmentation
-* Uses Atrous Spatial Pyramid Pooling (ASPP)
-
----
-
-## Training Instructions
-
-Place datasets into:
-
-```
-data/train/
-data/test/
-data/ais_data/
-```
-
-Open:
-
-```
-notebooks/1_UNet_Training.ipynb
-notebooks/2_DeepLabV3_Training.ipynb
-```
-
-Model weights will save into:
-
-```
-saved_models/
-```
-
----
-
-## Inference
-
-Run:
-
-```
-notebooks/3_Final_Inference.ipynb
-```
-
-Performs:
-
-* Preprocessing
-* Spill detection
-* IoU / Dice evaluation
-* Model comparison
-* Mask overlays
-
----
-
-## AIS Data Usage (Optional)
-
-AIS data helps to:
-
-* Track ships near spill locations
-* Identify suspicious vessel paths
-* Correlate ship activity with detected spills
-
----
-
-## 🤝 How to Contribute (Fork → Clone → Branch → Commit → PR)
-
-### **1️⃣ Fork Repo**
-
-Go to:
 [https://github.com/Spectrae/oil-spill-detection](https://github.com/Spectrae/oil-spill-detection)
-Click **Fork**.
 
----
-
-### **2️⃣ Clone Your Fork**
+## **2️⃣ Clone**
 
 ```bash
 git clone https://github.com/YOUR-USERNAME/oil-spill-detection.git
 cd oil-spill-detection
 ```
 
----
-
-### **3️⃣ Create a New Branch**
+## **3️⃣ Branch**
 
 ```bash
 git checkout -b feature-name
 ```
 
----
-
-### **4️⃣ Add & Commit Changes**
+## **4️⃣ Commit**
 
 ```bash
 git add .
-git commit -m "Describe your update"
+git commit -m "Describe your changes"
 ```
 
----
-
-### **5️⃣ Push to Your Fork**
+## **5️⃣ Push**
 
 ```bash
 git push origin feature-name
 ```
 
----
+## **6️⃣ PR**
 
-### **6️⃣ Submit a Pull Request**
-
-* Go to your fork
-* Click **Compare & Pull Request**
-* Submit the PR
+Open a Pull Request on GitHub.
 
 ---
 
-## ⚠️ Do NOT Upload Large Files
+# ⚠️ Do NOT Upload Large Files
 
-Do **NOT** push:
+❌ `data/train/`
+❌ `data/test/`
+❌ AIS CSV files
+❌ `.jpg`, `.png`, `.tif`
+❌ `.h5` model weights
 
-* `data/train/`
-* `data/test/`
-* `data/ais_data/`
-* `.csv`, `.jpg`, `.png`, `.tif`
-* `.h5` weights
-
-These must remain local.
+These remain locally stored.
 
 ---
 
-## 👨‍💻 Contributors
+# 👨‍💻 Contributors
 
-| Name              | Role                            | GitHub                                                     |
-| ----------------- | ------------------------------- | ---------------------------------------------------------- |
-| **Rick Mondal**   | Backend Developer               | [https://github.com/Spectrae](https://github.com/Spectrae) |
-| **Contributor 2** | Research / Model Tuning         | *(Add GitHub link)*                                        |
-| **Contributor 3** | Data Cleaning / AIS Integration | *(Add GitHub link)*                                        |
-| **Contributor 4** | Testing & Documentation         | *(Add GitHub link)*                                        |
+| Name              | Role                             | GitHub                                                     |
+| ----------------- | -------------------------------- | ---------------------------------------------------------- |
+| **Rick Mondal**   | Backend Developer                | [https://github.com/Spectrae](https://github.com/Spectrae) |
+| **Contributor 2** | Model Research / Optimization    | *(Add link)*                                               |
+| **Contributor 3** | AIS Data Cleaning / Processing   | *(Add link)*                                               |
+| **Contributor 4** | Frontend Testing / Documentation | *(Add link)*                                               |
 
-> Add team members' GitHub profiles as they join.
-
----
-
-## License
-
-This project is licensed under the **MIT License**.
+> Add more contributors as the project grows.
 
 ---
 
-## Acknowledgements
+# 🔐 Security
 
-* Kaggle SAR Dataset
-* DeepLabV3+ (Google Research)
-* NOAA Marine Cadastre AIS Dataset
+See **SECURITY.md** for responsible vulnerability disclosures.
+
+---
+
+# 🛡️ License
+
+Distributed under the **MIT License**.
+
+---
+
+<p align="center">
+  <b>🌊 Advancing Environmental AI • One Pixel at a Time</b>
+</p>
+
+<br>
+
+<p align="center">
+  <b>❤️ Thank You!</b><br>
+  Your contributions help make this project better for the community, researchers, and environmental applications worldwide.
+</p>
+
+
