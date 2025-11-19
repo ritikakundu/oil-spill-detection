@@ -1,65 +1,69 @@
-# ======================================
-# 🚫 DATA & DATASETS (DO NOT UPLOAD)
-# ======================================
+# -----------------------------
+# Ignore Data Files
+# -----------------------------
 data/
+dataset/
+datasets/
 *.csv
 *.tsv
+*.json
 *.xlsx
 *.xls
-*.json
-*.zip
-*.rar
-
-# Ignore image datasets
+*.png
 *.jpg
 *.jpeg
-*.png
 *.tif
 *.tiff
 *.bmp
 *.gif
-
-# ======================================
-# 🚫 MODEL WEIGHTS / ML CHECKPOINTS
-# ======================================
-saved_models/
-*.h5
+*.npz
+*.npy
 *.hdf5
-*.pb
-*.tflite
-*.pt
-*.pth
-*.onnx
 
-# ======================================
-# 🚫 PYTHON ENVIRONMENTS
-# ======================================
+# -----------------------------
+# Ignore Model Files
+# -----------------------------
+saved_models/
+models/
+checkpoints/
+*.h5
+*.pkl
+*.pt
+*.onnx
+*.ckpt
+
+# -----------------------------
+# Ignore Notebooks Checkpoints
+# -----------------------------
+.ipynb_checkpoints/
+*.ipynb
+
+# -----------------------------
+# Ignore Virtual Environments
+# -----------------------------
 .venv/
 venv/
-env/
 ENV/
-*.env
+env/
 
-# ======================================
-# 🚫 PYTHON CACHE & JUPYTER FILES
-# ======================================
+# -----------------------------
+# Ignore Python Cache
+# -----------------------------
 __pycache__/
 *.pyc
-*.pyo
-.ipynb_checkpoints/
-*.sqlite
 
-# ======================================
-# 🚫 EDITOR / OS GENERATED FILES
-# ======================================
+# -----------------------------
+# Ignore IDE / Editor Files
+# -----------------------------
 .vscode/
 .idea/
-.DS_Store
-Thumbs.db
 
-# ======================================
-# 🚫 LOGS / TEMP FILES
-# ======================================
+# -----------------------------
+# Ignore Logs
+# -----------------------------
 *.log
-*.tmp
-*.temp
+
+# -----------------------------
+# Ignore other temporary files
+# -----------------------------
+*.DS_Store
