@@ -102,15 +102,6 @@ source .venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 ```
-
-**If you only need to run the Streamlit app** (minimal install):
-
-```bash
-# inside the activated venv
-pip install streamlit
-# plus any model/runtime deps (tensorflow, opencv-python, numpy, etc.) if missing
-```
-
 ---
 
 ## Run the Streamlit App (app.py)
@@ -287,6 +278,5 @@ This project is licensed under the **MIT License**.
 cd ~/oil-spill-detection
 source .venv/bin/activate
 pip install -r requirements.txt
-pip install streamlit   # if streamlit is not in requirements
 streamlit run app.py
 ```
